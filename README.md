@@ -3,6 +3,8 @@
   <a href="https://badges.frapsoft.com/os/v2/open-source.svg?v=103"><img src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103"></a>
 </p>
 
+![Thumbnail](demo/demo.png)
+
 # User Activity Detection
 This project demonstrates the usage of Android Activity Recognition Transition API. Detect when users start or end an activity such as walking, driving, or biking. This is also called as Transition API for short.
 
