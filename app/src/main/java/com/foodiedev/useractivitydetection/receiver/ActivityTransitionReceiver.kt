@@ -14,25 +14,31 @@ import java.util.*
 class ActivityTransitionReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (ActivityTransitionResult.hasResult(intent)) {
-            val result = ActivityTransitionResult.extractResult(intent)!!
-            for (event in result.transitionEvents) {
-                //Info for debugging purposes
-                val info =
-                    "Transition: " + ActivityTransitionsUtil.toActivityString(event.activityType) +
-                            " (" + ActivityTransitionsUtil.toTransitionType(event.transitionType) + ")" + "   " +
-                            SimpleDateFormat("HH:mm:ss", Locale.US).format(Date())
+            val result = ActivityTransitionResult.extractResult(intent)
+            result?.let {
+                result.transitionEvents.forEach { event ->
+                    //Info for debugging purposes
+                    val info =
+                        "Transition: " + ActivityTransitionsUtil.toActivityString(event.activityType) +
+                                " (" + ActivityTransitionsUtil.toTransitionType(event.transitionType) + ")" + "   " +
+                                SimpleDateFormat("HH:mm:ss", Locale.US).format(Date())
 
 
-                Notify
-                    .with(context)
-                    .content {
-                        title = "Activity Detected"
-                        text =
-                            "I can see you are in ${ActivityTransitionsUtil.toActivityString(event.activityType)} state"
-                    }
-                    .show(id = Constants.ACTIVITY_TRANSITION_NOTIFICATION_ID)
+                    Notify
+                        .with(context)
+                        .content {
+                            title = "Activity Detected"
+                            text =
+                                "I can see you are in ${
+                                    ActivityTransitionsUtil.toActivityString(
+                                        event.activityType
+                                    )
+                                } state"
+                        }
+                        .show(id = Constants.ACTIVITY_TRANSITION_NOTIFICATION_ID)
 
-                Toast.makeText(context, info, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, info, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
