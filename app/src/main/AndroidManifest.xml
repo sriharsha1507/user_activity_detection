@@ -22,15 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <receiver
-            android:name=".receiver.ActivityTransitionReceiver"
-            android:exported="false"
-            android:permission="com.google.android.gms.permission.ACTIVITY_RECOGNITION">
-            <intent-filter>
-                <action android:name="action.TRANSITIONS_DATA" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>
